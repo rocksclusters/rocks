@@ -1,0 +1,32 @@
+# $Id: RESERVED-UIDS,v 1.23 2012/10/16 23:29:42 phil Exp $
+#
+# Register all UIDs created by Rolls here.  Third party developers may
+# request an ID allocation from devel@rocksclusters.org.
+
+ID	NAME		SOURCE ROLL	NOTES
+400	sge		sge
+401	globus		grid		
+402	viz		viz		owner of X11 session
+403	rocksdb		base		foundation mysql user
+404	biouser		bio		user associated with the bioroll
+405	jboss		java		jboss not started by default
+406	gxmap		gx-map
+407	condor		condor		condor master user
+408	pbs		pbs		pbs batch
+409	postgres	postgres8	postgres version 8 roll
+410	cvs		cvs-server
+411	cvsanon		cvs-server
+412	tomcat		java		tomcat not started by default
+413	nagios		nagios
+414	ssoadmin	camera		SSO admin user
+415	wsuser		camera		ws user for dropbox
+416	hg		------		mercurial user
+417	boinc		boinc		boinc user
+418 	moab		moab		moab scheduler user
+419	zfsuser		thumper-conf	ZFS Replication user
+420	postfix		base		Postfix Mail User
+421     flexlm		triton		flexlm user	
+423	git		git		git user
+424	db2		db2		db2 roll used on triton
+425	apache		base		Used only on Solaris. DO NOT USE ON LINUX
+426	google-otp	base	 	Group for google-otp authentication	

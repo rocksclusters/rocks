@@ -1,0 +1,13 @@
+CVS TREE HAS CHANGED
+
+Everything is now a Roll and in the roll directory.  The old rocks,
+ganglia, and contrib directories are now empty.  To make your cvs updates
+simple you should always update with the following command:
+
+	# cvs update -dP
+	
+This will create all new directories ('-d') and will then prune the old 
+empty ones ('-P').
+
+	- rocks team
+

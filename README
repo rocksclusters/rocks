@@ -1,0 +1,142 @@
+(C) UC Regents, 2012
+Welcome to the Rocks Source Tree.
+
+******************** CAUTION *********************** 
+Building Rocks from source is 
+	(a) Time consuming
+	(b) Invasive. A great deal of software will be added to to 
+	    your build host.  There are literally 100+ packages that are
+            needed to build the 300+ RPMs of a full build
+	(c) Space consuming. At least 40GB of free space
+
+I. Tested Build Environments
+There are two tested methods of building Rocks
+	1) On a CentOS system without Rocks
+	2) On a Rocks Development Appliance
+
+II. Setup
+A. Download the full source tree
+B. Update OS Mirror location
+	One of the primary reasons that so much disk space is needed 
+	is because the complete CentOS distribution and updates 
+	are mirrored, then built as DVD images, and finally added to 
+	the local distribution (3 copies).  Disk space is cheap.  
+
+	Having a mirror that is close to you (network distance) makes 
+	the mirroring process much quicker.  The file
+        	src/roll/base/OSROLL/version.mk 
+	contains a line 
+		MIRRORURL=http://mirror.hmc.edu
+
+	(a) Edit the above file to specify a mirror closer to you
+	(b) The environment variable WORKDIR controls where the 
+	mirror is created. If WORKDIR does not exist, /tmp is used. 
+
+IIIa.  Bootstrapping a CentOS system without Rocks
+	Rocks needs Rocks to build completely. In particular, the 
+	Rocks database has to be set up properly. The steps to perform 
+	this are as follows: 
+
+	(a) Install CentOS as a Desktop Workstation
+	(b) Download Rocks Source code. 
+	(c) cd src/roll/base
+	(d) ./bootstrap0.sh < /dev/null &> /tmp/bootstrap0.sh.out
+
+	Inspect the the last few hundred lines of /tmp/bootstrap0.sh.out,
+	You should see yum install a large number of packages.
+        
+	(e) Log out. Log back in, to make sure that newly installed /etc/profile	scripts have been sourced.
+
+OR
+
+IIIb.  Bootstrapping a Development Appliance 
+	Rocks needs Rocks to build completely. 
+	Most of the prerequisites are already on a Develeopment Appliance,
+	but further prep is needed to build rocks.
+	The steps to perform this are as follows: 
+
+	(a) Install CentOS as a Desktop Workstation
+	(b) Download Rocks Source code. 
+	(c) cd src/roll/base
+	(d) ./prepdevel.sh < /dev/null &> /tmp/prepdevel.sh.out
+
+	Inspect the the last few hundred lines of /tmp/prepdevel.sh.out,
+	You should see yum install a large number of packages.
+        
+	(e) Log out. Log back in, to make sure that newly installed /etc/profile	scripts have been sourced.
+
+IV.  Results of Bootstrap
+	If things have worked well, then
+	# rocks list roll
+	Output should look similar to the following:
+# rocks list roll
+NAME                VERSION    ARCH   ENABLED
+CentOS:             5.8        x86_64 yes    
+Updates-CentOS-5.8: 2012-04-17 x86_64 yes 
+
+	Notice that the Updates Roll should have the date on which bootsrapped. 
+
+V.  Building Rocks
+	The primary driving script to build all of Rocks is builder.sh.
+	The Order in which rolls are built is critical, both the base roll and
+	kernel rolls need to be built and part of the local distribution before
+	any other rolls have been built.  If for some reason, the base and/or
+	kernel rolls do not build, the build will abort.
+
+	# ./builder.sh < /dev/null &> /tmp/builder.sh.out &
+
+	Each Roll will have the output of its build stored in 
+	# /tmp/clean-<roll>.out    (Output of make clean)
+	# /tmp/make-<roll>-bootstrap.out  (Output of Bootstrap.sh for each roll)
+	# /tmp/make-<roll>-roll.out  (Output of Roll build)
+	# /tmp/build-<roll>.out (Summary of Roll Build, Inventory of RPMs)
+
+
+VI. Example build-<roll>.out output.
+The log files for a particular build of the HPC roll  
+# ls -l /tmp/*hpc*
+-rw-r--r-- 1 root root    1142 Apr 17 07:40 /tmp/build-hpc.out
+-rw-r--r-- 1 root root   22530 Apr 17 06:41 /tmp/clean-hpc.out
+-rw-r--r-- 1 root root 3201581 Apr 17 07:03 /tmp/make-hpc-bootstrap.out
+-rw-r--r-- 1 root root 4050886 Apr 17 07:40 /tmp/make-hpc-roll.out
+
+An Example (Successful) Build of the HPC roll (/tmp/build-hpc.out) looks like
+========================================================
+Starting hpc Roll Bootstrap: Tue Apr 17 06:41:45 PDT 2012
+Bootstrap Completed:  Tue Apr 17 07:03:16 PDT 2012
+Starting Build of Roll hpc:  Tue Apr 17 07:03:16 PDT 2012
+Roll Build Completed: Tue Apr 17 07:39:58 PDT 2012
+SUCCESS: ISO image built
+-rw-r--r-- 1 root root 32045056 Apr 17 07:39 hpc-5.5-0.x86_64.disk1.iso
+Building usersguide: Tue Apr 17 07:39:58 PDT 2012
+Copying hpc to Rolls.....61812 blocks
+/export/repositories/rocks/src/roll/hpc/src/usersguide /export/repositories/rocks/src/roll/hpc
+/export/repositories/rocks/src/roll/hpc
+Rebuild of Roll Complete: Tue Apr 17 07:40:15 PDT 2012
+RPMS expected: 11
+RPMS built: 11
+DETAILS:
+ClusterTools_gnu
+ClusterTools_gnu-8.2.1-09d.x86_64.rpm
+iozone
+iozone-3.397-0.x86_64.rpm
+iperf
+iperf-2.0.5-1.x86_64.rpm
+mpich2-ethernet-gnu
+mpich2-ethernet-gnu-1.4-0.x86_64.rpm
+mpi-tests
+mpi-tests-5.5-1.x86_64.rpm
+rocks-openmpi
+rocks-openmpi-1.4.3-2.x86_64.rpm
+rocks-pvm
+rocks-pvm-3.4.4-1.x86_64.rpm
+roll-hpc-kickstart
+roll-hpc-kickstart-5.5-0.noarch.rpm
+roll-hpc-usersguide
+roll-hpc-usersguide-5.5-0.noarch.rpm
+stream
+stream-5.9-1.x86_64.rpm
+sunct-extra
+sunct-extra-8.2.1-1.x86_64.rpm
+kill: No such process
+========================================================
