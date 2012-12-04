@@ -1,3 +1,6 @@
 [submodule "src/roll/base"]
 	path = src/roll/base
 	url = http://calit2-110-119-23.ucsd.edu/git/base.git
+[submodule "src/roll/kernel"]
+	path = src/roll/kernel
+	url = http://calit2-110-119-23.ucsd.edu/git/kernel.git
