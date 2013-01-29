@@ -10,10 +10,13 @@ ModuleFile=$BasePath../.gitmodules
 
 pushd $BasePath/..
 git submodule init
+BasePath=`git config --get remote.origin.url`
+BasePath=`dirname $BasePath`
 for i in $(git submodule | sed -e 's/.* //'); do
     spath=$(git config -f .gitmodules --get submodule.$i.path)
     surl=$(git config -f .gitmodules --get submodule.$i.url)
-    git clone --depth 1 $surl $spath
+    surl=`basename $surl`
+    git clone --depth 1 $BasePath/$surl $spath
 done
 git submodule update
 popd
