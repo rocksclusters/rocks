@@ -8,16 +8,23 @@
 # for this reason I wrote this script
 #
 
+
+# date2 should be 1 minute after date1
 date1='2008/04/30 00:00:00'
 date2='2008/04/30 00:01:00'
+
+if [ ! "$1" ]; then 
+	echo You must pass the name of the repo
+	exit -1
+fi
 
 export CVSROOT=clem@fyp.rocksclusters.org:/home/cvs/CVSROOT
 
 ### cvs import from a date proper procedure
-cvs co -D "$date1" rocks/src/roll/base
-mv rocks/src/roll/base .
+cvs co -D "$date1" rocks/src/roll/$1
+mv rocks/src/roll/$1 .
 rm -rf rocks/
-cd base/
+cd $1/
 cvs update -dP
 cvs status Makefile 
 
@@ -31,6 +38,6 @@ git add *
 git commit -m "First commit of the repo: pruned at ROCKS_5_0"  --date "$date1"
 
 #now do the incremental import
-git cvsimport -o master -A ../../Author.txt -p -d,"$date2" rocks/src/roll/base
+git cvsimport -o master -A ../../Author.txt -p -d,"$date2" rocks/src/roll/$1
 
 
