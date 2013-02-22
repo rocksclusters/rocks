@@ -13,6 +13,10 @@
 date1='2008/04/30 00:00:00'
 date2='2008/04/30 00:01:00'
 
+# Base path where the script is
+ScriptDir=`dirname $0`
+
+
 if [ ! "$1" ]; then 
 	echo You must pass the name of the repo
 	exit -1
@@ -38,6 +42,6 @@ git add *
 git commit -m "First commit of the repo: pruned at ROCKS_5_0"  --date "$date1"
 
 #now do the incremental import
-git cvsimport -o master -A ../../Author.txt -p -d,"$date2" rocks/src/roll/$1
+git cvsimport -o master -A $ScriptDir/Author.txt -p -d,"$date2" rocks/src/roll/$1
 
 

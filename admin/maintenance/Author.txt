@@ -1,0 +1,6 @@
+clem=Luca Clementi <luca.clementi@gmail.com>
+phil=Philip Papadopoulos <ppapadopoulos@ucsd.edu>
+nadya=Nadya Williams <nadya@sdsc.edu>
+mjk=Mason Katz <mason.katz@gmail.com>
+bruno=Greg Bruno <greg.bruno@gmail.com>
+anoop=Anoop Rajendra <anoop.rajendra@gmail.com>
