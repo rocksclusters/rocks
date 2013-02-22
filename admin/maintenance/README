@@ -1,0 +1,23 @@
+File used to maintain git repo
+==============================
+
+
+
+findBigFile.sh  
+--------------
+Used to find big files in your repo.
+
+ 
+removeFileFromHistory.sh
+------------------------
+This script remove from your repo all the file listed in the file passed as 
+the first argument. (it uses the output of findBigFile.sh)
+
+
+
+import.sh
+---------
+Used to import from CVS into a git repo pruning history from a specific date.
+Need to tweak script to adapt it to different situation.
+
+
