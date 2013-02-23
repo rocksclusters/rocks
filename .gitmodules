@@ -1,6 +1,0 @@
-[submodule "src/roll/base"]
-	path = src/roll/base
-	url = ../base.git
-[submodule "src/roll/kernel"]
-	path = src/roll/kernel
-	url = ../kernel.git
