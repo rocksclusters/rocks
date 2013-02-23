@@ -30,14 +30,21 @@ export CVSROOT=clem@fyp.rocksclusters.org:/home/cvs/CVSROOT
 
 ### cvs import from a date proper procedure
 cvs co -D "$date1" rocks/src/roll/$1
-mv rocks/src/roll/$1 .
-rm -rf rocks/
-cd $1/
-cvs update -dP
-cvs status Makefile 
-
-#clean the CVS 
-for i in `find . -name CVS`;do rm -rf $i;done
+if [ -d rocks ]; then 
+	mv rocks/src/roll/$1 .
+	rm -rf rocks/
+	cd $1/
+	cvs update -dP
+	cvs status Makefile 
+	
+	#clean the CVS 
+	for i in `find . -name CVS`;do rm -rf $i;done
+else 
+	#there was nothin in the cvs
+	mkdir $1
+	cd $1
+	touch empty
+fi
 
 #init git
 git init
