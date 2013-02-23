@@ -10,8 +10,9 @@
 
 
 # date2 should be 1 minute after date1
-date1='2008/04/30 00:00:00'
-date2='2008/04/30 00:01:00'
+# this is the date when ROCKS_5_0 was pushed
+date1='2008/04/30 00:01:00'
+date2='2008/04/30 00:02:00'
 
 # Base path where the script is
 # http://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself
@@ -43,6 +44,7 @@ git init
 #git status
 git add *
 git commit -m "First commit of the repo: pruned at ROCKS_5_0"  --date "$date1"
+#git tag ROCKS_5_0
 
 #now do the incremental import
 git cvsimport -o master -A $ScriptDir/Author.txt -p -d,"$date2" rocks/src/roll/$1
