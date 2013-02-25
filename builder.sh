@@ -41,6 +41,7 @@ for fproll in $FIRSTPASSROLLS; do
 	fi
 	popd
 	echo "--- Completed build of $fproll: `date`"
+    df -h
 done
 
 if [ "$FIRSTPASSROLLS" != "" ]; then
@@ -57,7 +58,16 @@ fi
 
 # Build remaining rolls 
 # Order is important
-ROLLS="area51 condor cvs-server ganglia hpc java sge web-server python perl bio zfs-linux"
+ROLLS="area51"
+
+if ! ps aux|grep condor_master > /dev/null ; then  
+	# we can build condor only if there is no condor running
+	ROLLS="$ROLLS condor"
+fi
+
+ROLLS="$ROLLS cvs-server ganglia hpc java sge web-server python perl bio zfs-linux"
+
+
 OSVERSION=`lsb_release -rs | cut -d . -f 1`
 if [ $OSVERSION -eq 5 ]; then
 	ROLLS+=" xen"
@@ -71,6 +81,7 @@ echo "Builder.sh Rolls: $ROLLS"
 
 for i in $ROLLS; do
 	echo "Building Roll: $i. See /tmp/build-$i.out"
+    df -h
 	$BUILDROLL -s -z -p src/roll  $i &> /tmp/build-$i.out
 done
 echo "Builder.sh Complete at `date`"
