@@ -5,6 +5,9 @@
 # if you want to checkout only the head of the tree
 #
 
+echo "Not used anymore (now this repo does not use submodule any more)"
+exit -1 
+
 BasePath=`dirname $0`
 ModuleFile=$BasePath../.gitmodules
 
