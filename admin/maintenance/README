@@ -13,6 +13,13 @@ removeFileFromHistory.sh
 This script remove from your repo all the file listed in the file passed as 
 the first argument. (it uses the output of findBigFile.sh)
 
+An example to run this two scripts is from the base directory of a repo:
+
+    findBigFile.sh 10000000 > temp
+    removeFileFromHistory.sh temp
+
+will remove all the file which are bigger that 1M and are not present in the 
+currently checked out version of the repository.
 
 
 import.sh

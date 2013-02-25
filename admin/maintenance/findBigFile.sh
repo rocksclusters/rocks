@@ -38,7 +38,7 @@ do
     # extract the size in bytes
     size=`echo $y | awk '{print $3}'`
     #echo "line  is $y"
-    if [ "$size" -gt "$1" ] ; then
+    if [ "$size" -gt "$1" ] 2> /dev/null ; then
         # extract the compressed size in bytes
         # not needed
         # compressedSize=`echo $y | cut -f 4 -d ' '`
