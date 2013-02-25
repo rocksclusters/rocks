@@ -28,4 +28,12 @@ Used to import from CVS into a git repo pruning history from a specific date.
 This script has been used to migrate from CVS to git all the Rocks code.
 ATT: cvsps on redhat 6.3 is bugged and will not import properly the tags
 
+verify.sh
+---------
+it is used that two repository are the same using md5sum checksome of every file
+in the repository.
+
+    verify.sh cvs_repo/base/path new_git_repo/base/path
+
+
 
