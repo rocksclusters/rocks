@@ -1,5 +1,4 @@
 src/roll/backup
-src/roll/viz
 src/roll/java
 src/roll/web-server
 src/roll/restore
