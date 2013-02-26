@@ -3,6 +3,10 @@
 # clone all the subrepo
 #
 
+if [ "$1" == "--source" ]; then 
+    SOURCE=true
+    baseURL="http://github.com/rocksclusters"
+fi
 
 
 SubModule=`cat .gitignore`
@@ -16,8 +20,15 @@ pushd src/roll
 for i in $SubModule;
 do 
     modName=`basename $i`
-    echo "  Cloning $baseRemote/$modName.git repository" 
-    git clone $baseRemote/$modName.git $modName
+    if [ "$SOURCE" ]; then 
+        wget -O $modName.tar.gz $baseURL/$modName/archive/master.tar.gz
+	tar -xvzf $modName.tar.gz
+	mv $modName-master $modName
+	rm $modName.tar.gz
+    else
+        echo "  Cloning $baseRemote/$modName.git repository" 
+        git clone $baseRemote/$modName.git $modName
+    fi
 done
 popd
 
