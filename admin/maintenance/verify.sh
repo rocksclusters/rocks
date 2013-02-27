@@ -27,7 +27,7 @@ fi
 
 cd $baseCVS
 rm -f md5sum.txt
-for i in `find . -type f | grep -v CVS`; do 
+for i in `find . -type f | grep -v CVS | grep -v .git | grep -v .svn`; do 
     md5sum $i >> md5sum.txt
 done 
 cd -
