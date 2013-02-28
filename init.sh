@@ -21,10 +21,10 @@ for i in $SubModule;
 do 
     modName=`basename $i`
     if [ "$SOURCE" ]; then 
-        wget -O $modName.tar.gz $baseURL/$modName/archive/master.tar.gz
-	tar -xvzf $modName.tar.gz
-	mv $modName-master $modName
-	rm $modName.tar.gz
+        wget -nv -O $modName.tar.gz $baseURL/$modName/archive/master.tar.gz || exit -1
+        tar -xvzf $modName.tar.gz || exit -1
+        mv $modName-master $modName || exit -1
+        rm $modName.tar.gz
     else
         echo "  Cloning $baseRemote/$modName.git repository" 
         git clone $baseRemote/$modName.git $modName
