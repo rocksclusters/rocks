@@ -49,13 +49,18 @@ do
 	if [ "$SOURCE" ]; then
 		#if tag_name is not defined set it to master
 		test $tag_name || tag_name=master
-		wget -nv -O $modName.tar.gz $baseURL/$modName/archive/$tag_name.tar.gz || exit -1
-		tar -xzf $modName.tar.gz || exit -1
-		mv $modName-$tag_name $modName || exit -1
+		if [ "$tag_name" == "master" ] ; then
+			wget -nv -O $modName.tar.gz $baseURL/$modName/archive/$tag_name.tar.gz || exit 1
+		else
+			# maybe that branch is not defined for this repo let's skip it
+			wget -nv -O $modName.tar.gz $baseURL/$modName/archive/$tag_name.tar.gz || continue
+		fi
+		tar -xzf $modName.tar.gz || exit 1
+		mv $modName-$tag_name $modName || exit 1
 		rm $modName.tar.gz
 	else
 		echo "  Cloning $baseRemote/$modName.git repository" 
-		git clone $baseRemote/$modName.git $modName || exit -1
+		git clone $baseRemote/$modName.git $modName || exit 1
 		echo tag name $tag_name
 		if [ "$tag_name" ]; then
 			pushd $modName
