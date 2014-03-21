@@ -11,6 +11,9 @@ function usage(){
 	echo 
 	echo "For each submoudle present in this repository it run the given <command> in "
 	echo "the submodule path."
+	echo ""
+	echo "To delete all the downloaded subrepo use:"
+	echo -e "    ./admin/forEverySubrepo.sh 'cd ../../..; rm -rf \$repo_name'"
 
 }
 
@@ -32,10 +35,13 @@ repoList=`cat $BasePath/.gitignore`
 #TODO we need to make this a little more dinamic
 for i in $repoList;
 do
-    pushd $i  &> /dev/null
-    echo "  --------------------  Repository `basename $i`  "
-    $@
-    popd  &> /dev/null
+	if [ -d "$i" ]; then
+		pushd $i  &> /dev/null
+		echo "  --------------------  Repository `basename $i` repo_name=$i "
+		export repo_name=$i
+		eval "$@"
+		popd  &> /dev/null
+	fi
 done
 
 
