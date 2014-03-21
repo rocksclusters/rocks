@@ -49,7 +49,8 @@ IIIa.  Bootstrapping a CentOS system without Rocks
 	Inspect the the last few hundred lines of /tmp/bootstrap0.sh.out,
 	You should see yum install a large number of packages.
         
-	(e) Log out. Log back in, to make sure that newly installed /etc/profile	scripts have been sourced.
+	(e) Log out. Log back in, to make sure that newly installed /etc/profile
+	    scripts have been sourced.
 
 OR
 
@@ -67,7 +68,8 @@ IIIb.  Bootstrapping a Development Appliance
 	Inspect the the last few hundred lines of /tmp/prepdevel.sh.out,
 	You should see yum install a large number of packages.
         
-	(e) Log out. Log back in, to make sure that newly installed /etc/profile	scripts have been sourced. In particular, /etc/profile.d/rocks-binaries.sh
+	(e) Log out. Log back in, to make sure that newly installed /etc/profile
+	    scripts have been sourced. In particular, /etc/profile.d/rocks-binaries.sh
 
 IV.  Results of Bootstrap
 	If things have worked well, then
