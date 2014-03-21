@@ -16,6 +16,10 @@ There are two tested methods of building Rocks
 
 II. Setup
 A. Download the full source tree
+	To download all the Rocks source code use the ./init.sh script 
+	in this repo. It cycles through all the required subrepo and 
+	download them automatically.
+	(for more info run ./init.sh -h)
 B. Update OS Mirror location
 	One of the primary reasons that so much disk space is needed 
 	is because the complete CentOS distribution and updates 
