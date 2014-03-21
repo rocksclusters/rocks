@@ -60,7 +60,7 @@ IIIb.  Bootstrapping a Development Appliance
 	but further prep is needed to build rocks.
 	The steps to perform this are as follows: 
 
-	(a) Install CentOS as a Desktop Workstation
+	(a) Install Rocks node as a Development Appliance
 	(b) Download Rocks Source code. 
 	(c) cd src/roll/base
 	(d) ./prepdevel.sh < /dev/null &> /tmp/prepdevel.sh.out
