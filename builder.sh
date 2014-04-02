@@ -65,7 +65,7 @@ if ! ps aux|grep condor_master > /dev/null ; then
 	ROLLS="$ROLLS condor"
 fi
 
-ROLLS="$ROLLS cvs-server ganglia hpc java sge web-server python perl bio zfs-linux"
+ROLLS="$ROLLS cvs-server ganglia hpc java sge web-server python perl bio zfs-linux fingerprint_roll"
 
 
 OSVERSION=`lsb_release -rs | cut -d . -f 1`

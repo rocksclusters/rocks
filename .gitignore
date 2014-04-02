@@ -17,3 +17,4 @@ src/roll/sge
 src/roll/kernel
 src/roll/ganglia
 src/roll/service-pack
+src/roll/fingerprint_roll
