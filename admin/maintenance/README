@@ -36,4 +36,7 @@ in the repository.
     verify.sh cvs_repo/base/path new_git_repo/base/path
 
 
+removeBinaryFiles.sh
+--------------------
+it find big file and binary files in your repo and it removes them from it
 
