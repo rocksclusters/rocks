@@ -48,26 +48,31 @@ for i in `awk '{print $3}' $inputFile`;do
 
 done
 
+
+#mkdir upload 
+#git cat-file -p f520482244a7e5ecab44aa1d54dc651afdce0ddd > src/foundation-gd/gd-2.0.33.tar.gz
+
+
 echo git count-objects -v -- before files deletion
 git count-objects -v
 
 echo "Running filter branch"
-git filter-branch --index-filter "git rm --cached --ignore-unmatch $fileList" --tag-name-filter cat -- HEAD
+git filter-branch --index-filter "git rm --cached --ignore-unmatch $fileList" --tag-name-filter cat -- --all
 
 # 
 # now we really delete old unused stuff
 # 
-rm -rf .git/refs/original/
-git reflog expire --all --expire='0 days' 
-git repack -A -d
-git prune
+#rm -rf .git/refs/original/
+#git reflog expire --all --expire='0 days' 
+#git repack -A -d
+#git prune
 
-echo 'If you have branches you have to delete those with the following command'
-echo '
-git branch -D ROCKS_5_3_1 
-git reflog expire --expire=now --all
-git gc --aggressive --prune=now
-git repack -a -d -l
-'
+echo 'objects have been deleted not you have to clone this repo to see the difference in size'
+#echo '
+#git branch -D ROCKS_5_3_1 
+#git reflog expire --expire=now --all
+#git gc --aggressive --prune=now
+#git repack -a -d -l
+#'
 
 
