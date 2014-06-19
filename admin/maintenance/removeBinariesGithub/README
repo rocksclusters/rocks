@@ -1,0 +1,15 @@
+
+These scripts have been used to remove the binaries from the git repos
+on June 2014. 
+They are supposed to be run under the src/roll of a rocks tree.
+
+- backup: used to backup current repo to rocksclusters-attic
+- reduce_size.sh: used to shrink the size of the repo
+- push: force upload them in github after history has been re-written
+- removeFileFromHistoryKnownFiles: used by reduced size to rewirte history 
+- removeBinaryFiles.sh: it finds big files and binary files in your repo 
+  and it removes them from it. script is meant to be used with cutandpaste
+  from another shell
+
+ 
+
