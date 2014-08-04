@@ -62,10 +62,13 @@ ROLLS="area51"
 
 if ! ps aux|grep condor_master > /dev/null ; then  
 	# we can build condor only if there is no condor running
+	#
+	# when we build on batlab we can't build condor or we crash
+	# the machine
 	ROLLS="$ROLLS condor"
 fi
 
-ROLLS="$ROLLS cvs-server ganglia hpc java sge web-server python perl bio fingerprint_roll"
+ROLLS="$ROLLS os ganglia hpc java sge web-server python perl bio fingerprint_roll"
 
 
 OSVERSION=`lsb_release -rs | cut -d . -f 1`
