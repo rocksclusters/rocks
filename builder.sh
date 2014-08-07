@@ -86,5 +86,29 @@ for i in $ROLLS; do
 	echo "Building Roll: $i. See /tmp/build-$i.out"
 	df -h
 	$BUILDROLL -s -z -p src/roll  $i &> /tmp/build-$i.out
+
+	if [ ! -f src/roll/$fproll/$i*iso ]; then
+		echo "Could not Create roll $i Aborting"
+		exit 127
+	fi
+
+	rocks list roll $i &> /dev/null
+	if [ $? == 0 ]; then
+		echo "Removing old $i roll"
+		rocks remove roll $i
+	fi
+	pushd src/roll/$i
+	rocks add roll $i*iso
+	rocks enable roll $i
+	popd
 done
+
+# we need to rebuild the distro before we can make the os roll
+pushd /export/rocks/install
+rocks create distro
+popd
+df -h
+$BUILDROLL -s -z -p src/roll os &> /tmp/build-os.out
+
+
 echo "Builder.sh Complete at `date`"
