@@ -68,7 +68,7 @@ if ! ps aux|grep condor_master > /dev/null ; then
 	ROLLS="$ROLLS condor"
 fi
 
-ROLLS="$ROLLS os ganglia hpc java sge web-server python perl bio fingerprint_roll"
+ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll"
 
 
 OSVERSION=`lsb_release -rs | cut -d . -f 1`
@@ -84,7 +84,7 @@ echo "Builder.sh Rolls: $ROLLS"
 
 for i in $ROLLS; do
 	echo "Building Roll: $i. See /tmp/build-$i.out"
-    df -h
+	df -h
 	$BUILDROLL -s -z -p src/roll  $i &> /tmp/build-$i.out
 done
 echo "Builder.sh Complete at `date`"
