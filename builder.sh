@@ -87,7 +87,7 @@ for i in $ROLLS; do
 	df -h
 	$BUILDROLL -s -z -p src/roll  $i &> /tmp/build-$i.out
 
-	if [ ! -f src/roll/$fproll/$i*iso ]; then
+	if [ ! -f src/roll/$i/$i*iso ]; then
 		echo "Could not Create roll $i Aborting"
 		exit 127
 	fi
