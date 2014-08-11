@@ -87,19 +87,23 @@ for i in $ROLLS; do
 	df -h
 	$BUILDROLL -s -z -p src/roll  $i &> /tmp/build-$i.out
 
-	if [ ! -f src/roll/$i/$i*iso ]; then
+	# some rolls are inside a directory whose name is not the same
+	# as the ROLLNAME 
+	rollname=`awk '/^ROLLNAME/ {print $3}' src/roll/*/version.mk`
+	test $rollname || rollname=$i
+	if [ ! -f src/roll/$i/${rollname}*iso ]; then
 		echo "Could not Create roll $i Aborting"
 		exit 127
 	fi
 
-	rocks list roll $i &> /dev/null
+	rocks list roll $rollname &> /dev/null
 	if [ $? == 0 ]; then
-		echo "Removing old $i roll"
-		rocks remove roll $i
+		echo "Removing old $rollname roll"
+		rocks remove roll $rollname
 	fi
 	pushd src/roll/$i
-	rocks add roll $i*iso
-	rocks enable roll $i
+	rocks add roll $rollname*iso
+	rocks enable roll $rollname
 	popd
 done
 
