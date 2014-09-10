@@ -68,17 +68,8 @@ if ! ps aux|grep condor_master > /dev/null ; then
 	ROLLS="$ROLLS condor"
 fi
 
-ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll"
+ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll kvm zfs-linux"
 
-
-OSVERSION=`lsb_release -rs | cut -d . -f 1`
-if [ $OSVERSION -eq 5 ]; then
-	ROLLS+=" xen"
-else
-	if [ "`/bin/arch`" == "x86_64" ]; then 
-		ROLLS+=" kvm zfs-linux" 
-	fi
-fi
 
 echo "Builder.sh Rolls: $ROLLS"
 
