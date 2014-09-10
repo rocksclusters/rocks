@@ -34,9 +34,10 @@ ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll k
 # this is to avoid downloading error all the way down into the compilation
 # and fail sooner than later
 #
-for roll in $FIRSTPASSROLLS $ROLL; do
-	echo "Downloading binaries for $roll"
-	if [ -d  src/roll/$roll ]; then
+for roll in $FIRSTPASSROLLS $ROLLS; do
+
+	if ls src/roll/$roll/.*.metadata ; then
+		echo "Downloading binaries for $roll"
 		pushd src/roll/$roll
 		#
 		# try it twice, if it fails twice abort
