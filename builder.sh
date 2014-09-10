@@ -15,6 +15,39 @@ BUILDROLL=src/roll/rocksbuild/build-roll.sh
 
 FIRSTPASSROLLS="base rocksbuild kernel" 
 
+# Build remaining rolls 
+# Order is important
+ROLLS="area51"
+
+if ! ps aux|grep condor_master > /dev/null ; then  
+	# we can build condor only if there is no condor running
+	#
+	# when we build on batlab we can't build condor or we crash
+	# the machine
+	ROLLS="$ROLLS condor"
+fi
+
+ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll kvm zfs-linux"
+
+#
+# download all the binaries first 
+# this is to avoid downloading error all the way down into the compilation
+# and fail sooner than later
+#
+for roll in $FIRSTPASSROLLS $ROLL; do
+	echo "Downloading binaries for $roll"
+	if [ -d  src/roll/$roll ]; then
+		pushd src/roll/$roll
+		#
+		# try it twice, if it fails twice abort
+		make download || make download || exit 1
+		popd
+	fi
+done
+df -h
+
+
+
 for fproll in $FIRSTPASSROLLS; do 
 	echo "--- Starting build of $fproll: `date`"
 	echo "Building First Pass Roll: $fproll"
@@ -41,7 +74,6 @@ for fproll in $FIRSTPASSROLLS; do
 	fi
 	popd
 	echo "--- Completed build of $fproll: `date`"
-    df -h
 done
 
 if [ "$FIRSTPASSROLLS" != "" ]; then
@@ -55,20 +87,6 @@ fi
 . /etc/profile.d/rocks-binaries.sh
 . /etc/profile.d/java.sh
 . /etc/profile.d/modules.sh
-
-# Build remaining rolls 
-# Order is important
-ROLLS="area51"
-
-if ! ps aux|grep condor_master > /dev/null ; then  
-	# we can build condor only if there is no condor running
-	#
-	# when we build on batlab we can't build condor or we crash
-	# the machine
-	ROLLS="$ROLLS condor"
-fi
-
-ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll kvm zfs-linux"
 
 
 echo "Builder.sh Rolls: $ROLLS"
