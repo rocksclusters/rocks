@@ -19,7 +19,8 @@ FIRSTPASSROLLS="base rocksbuild kernel"
 # Order is important
 ROLLS="area51"
 
-if ! ps aux|grep condor_master > /dev/null ; then  
+pgrep condor_master > /dev/null
+if [ $? -ne 0 ]; then  
 	# we can build condor only if there is no condor running
 	#
 	# when we build on batlab we can't build condor or we crash
