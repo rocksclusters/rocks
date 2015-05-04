@@ -99,7 +99,7 @@ for i in $ROLLS; do
 
 	# some rolls are inside a directory whose name is not the same
 	# as the ROLLNAME 
-	rollname=`awk '/^ROLLNAME/ {print $3}' src/roll/$i/version.mk`
+	rollname=`awk -F = '/ROLLNAME/ {print $NF}' src/roll/$i/version.mk | awk '{print $1}'`
 	test "$rollname" || rollname=$i
 	if [ ! -f src/roll/$i/${rollname}*iso ]; then
 		echo "Unable to create roll ${i}. Aborting!"
