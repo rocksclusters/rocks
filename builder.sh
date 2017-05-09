@@ -14,6 +14,7 @@ popd
 BUILDROLL=src/roll/rocksbuild/build-roll.sh
 
 FIRSTPASSROLLS="base rocksbuild kernel" 
+FIRSTPASSROLLS="core rocksbuild base kernel" 
 
 # Build remaining rolls 
 # Order is important
