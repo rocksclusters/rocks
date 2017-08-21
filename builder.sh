@@ -14,6 +14,7 @@ popd
 BUILDROLL=src/roll/rocksbuild/build-roll.sh
 
 FIRSTPASSROLLS="base rocksbuild kernel" 
+FIRSTPASSROLLS="core base kernel" 
 
 # Build remaining rolls 
 # Order is important
@@ -29,6 +30,7 @@ if [ $? -ne 0 ]; then
 fi
 
 ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll kvm zfs-linux"
+ROLLS="$ROLLS hpc python fingerprint_roll zfs-linux"
 
 #
 # download all the binaries first 
