@@ -43,7 +43,10 @@ IIIa.  Bootstrapping a CentOS system without Rocks
 
 	(a) Install CentOS as a Desktop Workstation
 	(b) Download Rocks Source code. 
-	(c) cd src/roll/base
+	(c) on CentOS 6
+		cd src/roll/base
+	(c1)on CentOS 7
+		cd src/roll/core
 	(d) ./bootstrap0.sh < /dev/null &> /tmp/bootstrap0.sh.out
 
 	Inspect the the last few hundred lines of /tmp/bootstrap0.sh.out,
@@ -62,7 +65,10 @@ IIIb.  Bootstrapping a Development Appliance
 
 	(a) Install Rocks node as a Development Appliance
 	(b) Download Rocks Source code. 
-	(c) cd src/roll/base
+	(c) on CentOS 6
+		cd src/roll/base
+	(c1)on CentOS 7
+		cd src/roll/core
 	(d) ./prepdevel.sh < /dev/null &> /tmp/prepdevel.sh.out
 
 	Inspect the the last few hundred lines of /tmp/prepdevel.sh.out,
@@ -150,6 +156,10 @@ kill: No such process
 VII. One step, build it all on a CentOS Desktop Workstation
 The following should build all of Rocks without explictly requiring one to logout/login after the initial bootstrap.sh
 
+On CentOS 6
 # (cd src/roll/base; ./bootstrap0.sh &> /tmp/bootstrap0.sh.out < /dev/null; cd ../../..; . /etc/profile.d/rocks-binaries.sh; ./builder.sh &> /tmp/builder.sh.out < /dev/null ) &
+
+On CentOS 7
+# (cd src/roll/core; ./bootstrap0.sh &> /tmp/bootstrap0.sh.out < /dev/null; cd ../../..; . /etc/profile.d/rocks-binaries.sh; ./builder.sh &> /tmp/builder.sh.out < /dev/null ) &
 
 
