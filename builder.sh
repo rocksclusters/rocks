@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Builder.sh Starting at `date`"
-echo "Setting SELINUX to permissive (lorax in kernel roll)
+echo "Setting SELINUX to permissive (lorax in kernel roll)"
 /usr/sbin/setenforce 0
 
 ## Build the rocksbuild (1st pass)
