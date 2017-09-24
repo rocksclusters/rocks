@@ -18,7 +18,6 @@ FIRSTPASSROLLS="core base kernel"
 
 # Build remaining rolls 
 # Order is important
-ROLLS="area51"
 
 pgrep condor_master > /dev/null
 if [ $? -ne 0 ]; then  
@@ -30,7 +29,8 @@ if [ $? -ne 0 ]; then
 fi
 
 ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll kvm zfs-linux"
-ROLLS="$ROLLS hpc python fingerprint_roll zfs-linux"
+ROLLS="ganglia hpc python fingerprint_roll kvm zfs-linux perl"
+ROLLS="$ROLLS area51"
 
 #
 # download all the binaries first 
