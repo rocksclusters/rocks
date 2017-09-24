@@ -1,6 +1,8 @@
 #!/bin/sh
 
 echo "Builder.sh Starting at `date`"
+echo "Setting SELINUX to permissive (lorax in kernel roll)
+/usr/sbin/setenforce 0
 
 ## Build the rocksbuild (1st pass)
 ## This adds some updated versions of packages, as needed
@@ -29,7 +31,7 @@ if [ $? -ne 0 ]; then
 fi
 
 ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll kvm zfs-linux"
-ROLLS="ganglia hpc python fingerprint_roll kvm zfs-linux perl"
+ROLLS="ganglia hpc python fingerprint_roll kvm serf zfs-linux openvswitch perl"
 ROLLS="$ROLLS area51"
 
 #
