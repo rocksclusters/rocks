@@ -31,7 +31,7 @@ if [ $? -ne 0 ]; then
 fi
 
 ROLLS="$ROLLS ganglia hpc java sge web-server python perl bio fingerprint_roll kvm zfs-linux"
-ROLLS="ganglia hpc python fingerprint_roll kvm serf zfs-linux openvswitch perl"
+ROLLS="ganglia hpc python fingerprint_roll kvm zfs-linux openvswitch sge condor perl rabbitmq-roll img-storage-roll"
 ROLLS="$ROLLS area51"
 
 #
@@ -127,7 +127,7 @@ pushd /export/rocks/install
 rocks create distro
 popd
 df -h
-$BUILDROLL -s -z -p src/roll os &> /tmp/build-os.out
+# $BUILDROLL -s -z -p src/roll os &> /tmp/build-os.out
 
 
 echo "Builder.sh Complete at `date`"

@@ -21,3 +21,5 @@ src/roll/fingerprint_roll
 src/roll/core
 src/roll/serf
 src/roll/openvswitch
+src/roll/img-storage-roll
+src/roll/rabbitmq-roll
