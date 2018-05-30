@@ -156,6 +156,8 @@ kill: No such process
 VII. One step, build it all on a CentOS Desktop Workstation
 The following should build all of Rocks without explictly requiring one to logout/login after the initial bootstrap.sh
 
+Note, if you not run init.sh from this subdirectory, you do so prior
+
 On CentOS 6
 # (cd src/roll/base; ./bootstrap0.sh &> /tmp/bootstrap0.sh.out < /dev/null; cd ../../..; . /etc/profile.d/rocks-binaries.sh; ./builder.sh &> /tmp/builder.sh.out < /dev/null ) &
 
